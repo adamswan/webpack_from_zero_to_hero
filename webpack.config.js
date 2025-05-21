@@ -15,7 +15,10 @@ module.exports = {
   //! 核心节点3: loader
   module: {
     rules: [
-      //todo
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
 
@@ -26,4 +29,5 @@ module.exports = {
 
   //! 核心节点5: 模式
   mode: "development",
+  // mode: "production",
 };

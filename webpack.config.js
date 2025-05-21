@@ -25,6 +25,17 @@ module.exports = {
         test: /\.less$/,
         use: ["style-loader", "css-loader", "less-loader"],
       },
+      // 处理图片文件
+      {
+        test: /\.(png|jpg|jpeg|gif|webp|svg)$/,
+        type: "asset",
+        parser: {
+          dataUrlCondition: {
+            // 如果图片大小小于 10kb，则使用 base64 编码
+            maxSize: 10 * 1024,
+          },
+        },
+      },
     ],
   },
 

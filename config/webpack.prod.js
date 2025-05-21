@@ -22,12 +22,40 @@ module.exports = {
       // 处理 .css 文件
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          // 在变成css之前使用postcss
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  "postcss-preset-env", //能解决大多数css兼容性问题
+                ],
+              },
+            },
+          },
+        ],
       },
       // 处理 .less 文件
       {
         test: /\.less$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  "postcss-preset-env", //能解决大多数css兼容性问题
+                ],
+              },
+            },
+          },
+          "less-loader",
+        ],
       },
       // 处理图片文件
       {

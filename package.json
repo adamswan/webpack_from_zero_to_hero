@@ -22,10 +22,18 @@
     "webpack-cli": "^6.0.1",
     "html-webpack-plugin": "^5.5.0",
     "webpack-dev-server": "^4.8.1",
-    "mini-css-extract-plugin": "^2.6.0"
+    "mini-css-extract-plugin": "^2.6.0",
+    "postcss": "^8.4.13",
+    "postcss-loader": "^6.2.1",
+    "postcss-preset-env": "^7.5.0"
   },
   "dependencies": {
     "css-loader": "^7.1.2",
     "style-loader": "^4.0.0"
-  }
+  },
+  "browerslist": [
+    "last 2 versions",
+    ">  1%",
+    "not dead"
+  ]
 }

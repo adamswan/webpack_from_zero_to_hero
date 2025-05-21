@@ -70,4 +70,12 @@ module.exports = {
   //! 核心节点5: 模式
   mode: "development",
   // mode: "production",
+
+  // 开发服务器
+  devServer: {
+    host: "localhost",
+    port: 3000,
+    open: true,
+    hot: true,
+  },
 };

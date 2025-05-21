@@ -19,7 +19,8 @@
     "less-loader": "^12.3.0",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
-    "html-webpack-plugin": "^5.5.0"
+    "html-webpack-plugin": "^5.5.0",
+    "webpack-dev-server": "^4.8.1"
   },
   "dependencies": {
     "css-loader": "^7.1.2",

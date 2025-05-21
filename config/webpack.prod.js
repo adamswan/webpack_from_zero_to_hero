@@ -10,7 +10,7 @@ module.exports = {
   output: {
     // __dirname 表示当前文件所在的文件夹的绝对路径
     // path.resolve() 用于将路径或路径片段解析为一个绝对路径
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "../dist"),
     filename: "static/js/main.js",
     clean: true, // 每次打包时，自动清空 dist 目录
   },
@@ -57,25 +57,16 @@ module.exports = {
     // ESLint 监查
     new ESLintPlugin({
       // 监查指定路径下的文件
-      context: path.resolve(__dirname, "src"),
+      context: path.resolve(__dirname, "../src"),
     }),
     // HtmlWebpackPlugin
     new HtmlWebpackPlugin({
       // 以 public/index.html 为模板创建文件
       // 新的 html 文件会替换旧的
-      template: path.resolve(__dirname, "public/index.html"),
+      template: path.resolve(__dirname, "../public/index.html"),
     }),
   ],
 
   //! 核心节点5: 模式
-  mode: "development",
-  // mode: "production",
-
-  // 开发服务器
-  devServer: {
-    host: "localhost",
-    port: 3000,
-    open: true,
-    hot: true,
-  },
+  mode: "production",
 };

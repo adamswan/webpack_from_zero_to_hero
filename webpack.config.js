@@ -1,5 +1,6 @@
 const path = require("path");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const loader = require("css-loader");
 
 module.exports = {
   //! 核心节点1：打包的入口，相对路径
@@ -41,6 +42,12 @@ module.exports = {
           // 输出图片的路径
           filename: "static/images/[hash:10][ext][query]",
         },
+      },
+      // babel
+      {
+        test: /\.js$/,
+        exclude: /node_modules/, // 排除 node_modules 目录下文件
+        loader: "babel-loader",
       },
     ],
   },

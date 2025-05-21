@@ -1,4 +1,5 @@
 const path = require("path");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
   //! 核心节点1：打包的入口，相对路径
@@ -9,7 +10,8 @@ module.exports = {
     // __dirname 表示当前文件所在的文件夹的绝对路径
     // path.resolve() 用于将路径或路径片段解析为一个绝对路径
     path: path.resolve(__dirname, "dist"),
-    filename: "main.js",
+    filename: "static/js/main.js",
+    clean: true, // 每次打包时，自动清空 dist 目录
   },
 
   //! 核心节点3: loader
@@ -35,13 +37,21 @@ module.exports = {
             maxSize: 10 * 1024,
           },
         },
+        generator: {
+          // 输出图片的路径
+          filename: "static/images/[hash:10][ext][query]",
+        },
       },
     ],
   },
 
   //! 核心节点4: plugin
   plugins: [
-    //todo
+    // ESLint 监查
+    new ESLintPlugin({
+      // 监查指定路径下的文件
+      context: path.resolve(__dirname, "src"),
+    }),
   ],
 
   //! 核心节点5: 模式

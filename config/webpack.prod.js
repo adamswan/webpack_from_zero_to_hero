@@ -1,6 +1,7 @@
 const path = require("path");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   //! 核心节点1：打包的入口，相对路径
@@ -21,12 +22,12 @@ module.exports = {
       // 处理 .css 文件
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       // 处理 .less 文件
       {
         test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
       },
       // 处理图片文件
       {
@@ -64,6 +65,11 @@ module.exports = {
       // 以 public/index.html 为模板创建文件
       // 新的 html 文件会替换旧的
       template: path.resolve(__dirname, "../public/index.html"),
+    }),
+    // MiniCssExtractPlugin
+    new MiniCssExtractPlugin({
+      // 输出 css 文件的路径
+      filename: "static/css/main.css",
     }),
   ],
 

@@ -1,6 +1,6 @@
 const path = require("path");
 const ESLintPlugin = require("eslint-webpack-plugin");
-const loader = require("css-loader");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   //! 核心节点1：打包的入口，相对路径
@@ -58,6 +58,12 @@ module.exports = {
     new ESLintPlugin({
       // 监查指定路径下的文件
       context: path.resolve(__dirname, "src"),
+    }),
+    // HtmlWebpackPlugin
+    new HtmlWebpackPlugin({
+      // 以 public/index.html 为模板创建文件
+      // 新的 html 文件会替换旧的
+      template: path.resolve(__dirname, "public/index.html"),
     }),
   ],
 

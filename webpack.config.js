@@ -15,9 +15,15 @@ module.exports = {
   //! 核心节点3: loader
   module: {
     rules: [
+      // 处理 .css 文件
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
+      },
+      // 处理 .less 文件
+      {
+        test: /\.less$/,
+        use: ["style-loader", "css-loader", "less-loader"],
       },
     ],
   },

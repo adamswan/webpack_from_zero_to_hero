@@ -1,6 +1,7 @@
 const path = require("path");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { getCPUThread } = require("./utils_config");
 
 module.exports = {
   //! 核心节点1：打包的入口，相对路径
@@ -44,11 +45,21 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/, // 排除 node_modules 目录下文件
-        loader: "babel-loader",
-        options: {
-          cacheDirectory: true, // 开启 babel 缓存
-          cacheCompression: false,
-        },
+        use: [
+          {
+            loader: "thread-loader",
+            options: {
+              workers: getCPUThread(), // 开启几个线程
+            },
+          },
+          {
+            loader: "babel-loader",
+            options: {
+              cacheDirectory: true, // 开启 babel 缓存
+              cacheCompression: false,
+            },
+          },
+        ],
       },
     ],
   },

@@ -1,3 +1,5 @@
+const os = require("os");
+
 module.exports = {
   getStyleLoader(MiniCssExtractPlugin, type = ".css") {
     switch (type) {
@@ -34,5 +36,10 @@ module.exports = {
           "less-loader",
         ];
     }
+  },
+
+  // 获取CPU线程数
+  getCPUThread() {
+    return os.cpus().length;
   },
 };

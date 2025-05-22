@@ -3,7 +3,8 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const { getStyleLoader } = require("./utiles_loader");
+const TersererPlugin = require("terser-webpack-plugin");
+const { getStyleLoader, getCPUThread } = require("./utils_config");
 
 module.exports = {
   //! 核心节点1：打包的入口，相对路径
@@ -50,11 +51,21 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/, // 排除 node_modules 目录下文件
-        loader: "babel-loader",
-        options: {
-          cacheDirectory: true, // 开启 babel 缓存
-          cacheCompression: false,
-        },
+        use: [
+          {
+            loader: "thread-loader",
+            options: {
+              workers: getCPUThread(), // 开启几个线程
+            },
+          },
+          {
+            loader: "babel-loader",
+            options: {
+              cacheDirectory: true, // 开启 babel 缓存
+              cacheCompression: false,
+            },
+          },
+        ],
       },
     ],
   },
@@ -81,10 +92,20 @@ module.exports = {
       // 输出 css 文件的路径
       filename: "static/css/main.css",
     }),
-
-    // 压缩.css文件
-    new CssMinimizerPlugin(),
   ],
+
+  // 压缩相关配置
+  optimization: {
+    minimize: true,
+    minimizer: [
+      // 压缩 .css 文件
+      new CssMinimizerPlugin(),
+      // 压缩 .js 文件
+      new TersererPlugin({
+        parallel: getCPUThread(), // 开启多线程
+      }),
+    ],
+  },
 
   //! 核心节点5: 模式
   mode: "production",

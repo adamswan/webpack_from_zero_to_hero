@@ -51,6 +51,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/, // 排除 node_modules 目录下文件
         loader: "babel-loader",
+        options: {
+          cacheDirectory: true, // 开启 babel 缓存
+          cacheCompression: false,
+        },
       },
     ],
   },
@@ -61,6 +65,8 @@ module.exports = {
     new ESLintPlugin({
       // 监查指定路径下的文件
       context: path.resolve(__dirname, "../src"),
+      cache: true, // 开启 ESLint 缓存
+      cacheLocation: path.resolve(__dirname, "../node_modules/.cache/.eslintcache"),
     }),
 
     // HtmlWebpackPlugin
@@ -82,4 +88,7 @@ module.exports = {
 
   //! 核心节点5: 模式
   mode: "production",
+
+  // 开启SourceMap
+  devtool: "source-map",
 };

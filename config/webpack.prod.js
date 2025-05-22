@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TersererPlugin = require("terser-webpack-plugin");
+// const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const { getStyleLoader, getCPUThread } = require("./utils_config");
 
 module.exports = {
@@ -100,10 +101,40 @@ module.exports = {
     minimizer: [
       // 压缩 .css 文件
       new CssMinimizerPlugin(),
+
       // 压缩 .js 文件
       new TersererPlugin({
         parallel: getCPUThread(), // 开启多线程
       }),
+
+      // 压缩图片
+      // new ImageMinimizerPlugin({
+      //   minimizer: {
+      //     implementation: ImageMinimizerPlugin.imageminGenerate,
+      //     options: {
+      //       plugins: [
+      //         // ["gifsicle", { interlaced: true }],
+      //         ["jpegtran", { progressive: true }],
+      //         ["optipng", { optimizationLevel: 5 }],
+      //         [
+      //           "svgo",
+      //           {
+      //             plugins: [
+      //               "preset-default",
+      //               "prefixIds",
+      //               {
+      //                 name: "sortAttrs",
+      //                 params: {
+      //                   xmlnsOrder: "alphabetical",
+      //                 },
+      //               },
+      //             ],
+      //           },
+      //         ],
+      //       ],
+      //     },
+      //   },
+      // }),
     ],
   },
 

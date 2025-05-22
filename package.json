@@ -25,7 +25,8 @@
     "mini-css-extract-plugin": "^2.6.0",
     "postcss": "^8.4.13",
     "postcss-loader": "^6.2.1",
-    "postcss-preset-env": "^7.5.0"
+    "postcss-preset-env": "^7.5.0",
+    "css-minimizer-webpack-plugin": "^3.4.1"
   },
   "dependencies": {
     "css-loader": "^7.1.2",

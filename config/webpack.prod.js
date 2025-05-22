@@ -2,6 +2,7 @@ const path = require("path");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { getStyleLoader } = require("./utiles_loader");
 
 module.exports = {
@@ -61,17 +62,22 @@ module.exports = {
       // 监查指定路径下的文件
       context: path.resolve(__dirname, "../src"),
     }),
+
     // HtmlWebpackPlugin
     new HtmlWebpackPlugin({
       // 以 public/index.html 为模板创建文件
       // 新的 html 文件会替换旧的
       template: path.resolve(__dirname, "../public/index.html"),
     }),
-    // MiniCssExtractPlugin
+
+    // .css 文件抽取出来，用<link>引入.html
     new MiniCssExtractPlugin({
       // 输出 css 文件的路径
       filename: "static/css/main.css",
     }),
+
+    // 压缩.css文件
+    new CssMinimizerPlugin(),
   ],
 
   //! 核心节点5: 模式

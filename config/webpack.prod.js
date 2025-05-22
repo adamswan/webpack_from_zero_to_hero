@@ -5,6 +5,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TersererPlugin = require("terser-webpack-plugin");
 // const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const PreloadWebpackPlugin = require("@vue/preload-webpack-plugin");
+const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 const { getStyleLoader, getCPUThread } = require("./utils_config");
 
 module.exports = {
@@ -93,6 +95,20 @@ module.exports = {
     new MiniCssExtractPlugin({
       // 输出 css 文件的路径
       filename: "static/css/[name].css",
+    }),
+
+    // 资源预加载
+    new PreloadWebpackPlugin({
+      rel: "preload",
+      as: "script",
+    }),
+
+    // PWA
+    // 测试时，需要装另一个测试用的包（pnpm i serve -g）, 否则serviceWorker注册会失败
+    // 执行指令： serve dist ,就会在以 dist 为根目录启动一个服务
+    new WorkboxWebpackPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
     }),
   ],
 

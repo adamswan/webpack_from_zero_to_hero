@@ -1,6 +1,7 @@
 const path = require("path");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 const { getCPUThread } = require("./utils_config");
 
 module.exports = {
@@ -74,11 +75,20 @@ module.exports = {
       cache: true, // 开启 ESLint 缓存
       cacheLocation: path.resolve(__dirname, "../node_modules/.cache/.eslintcache"),
     }),
+
     // HtmlWebpackPlugin
     new HtmlWebpackPlugin({
       // 以 public/index.html 为模板创建文件
       // 新的 html 文件会替换旧的
       template: path.resolve(__dirname, "../public/index.html"),
+    }),
+
+    // PWA
+    // 测试时，需要装另一个测试用的包（pnpm i serve -g）, 否则serviceWorker注册会失败
+    // 执行指令： serve dist ,就会在以 dist 为根目录启动一个服务
+    new WorkboxWebpackPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
     }),
   ],
 

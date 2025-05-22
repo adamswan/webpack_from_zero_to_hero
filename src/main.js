@@ -12,3 +12,17 @@ btn.addEventListener("click", () => {
       console.error(err);
     });
 });
+
+// 尝试注册 serviceWorker，注册成功后才能使用PWA
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then((registration) => {
+        console.log("serviceWorker注册成功", registration);
+      })
+      .catch((err) => {
+        console.error("serviceWorker注册失败", err);
+      });
+  });
+}

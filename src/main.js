@@ -1,11 +1,14 @@
-import { a as val } from "./count.js";
 import "./css/page.css";
 import "./less/pageB.less";
 
-console.log("打印val", val);
+const btn = document.querySelector(".btn1");
 
-const fn = () => {
-  console.log("高圆圆");
-};
-
-fn();
+btn.addEventListener("click", () => {
+  import(/* webpackChunkName: "gaoyuanyuan" */ "./count.js")
+    .then((module) => {
+      console.log("动态导入的count模块中的高圆圆", module.wife);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});

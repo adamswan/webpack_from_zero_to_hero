@@ -18,6 +18,12 @@
     "eslint": "^8.14.0",
     "eslint-webpack-plugin": "^3.1.1",
     "html-webpack-plugin": "^5.5.0",
+    "image-minimizer-webpack-plugin": "^3.2.3",
+    "imagemin": "^8.0.1",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^10.0.1",
     "less": "^4.3.0",
     "less-loader": "^12.3.0",
     "mini-css-extract-plugin": "^2.6.0",
@@ -27,17 +33,13 @@
     "thread-loader": "^4.0.4",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^4.8.1",
-    "image-minimizer-webpack-plugin": "^3.2.3",
-    "imagemin": "^8.0.1",
-    "imagemin-gifsicle": "^7.0.0",
-    "imagemin-jpegtran": "^7.0.0",
-    "imagemin-optipng": "^8.0.0",
-    "imagemin-svgo": "^10.0.1"
+    "webpack-dev-server": "^4.8.1"
   },
   "dependencies": {
     "css-loader": "^7.1.2",
-    "style-loader": "^4.0.0"
+    "lodash": "^4.17.21",
+    "style-loader": "^4.0.0",
+    "vue": "^3.5.14"
   },
   "browerslist": [
     "last 2 versions",

@@ -10,7 +10,8 @@ module.exports = {
   //! 核心节点2: 打包的出口，绝对路径
   output: {
     path: undefined, // 开发环境下，没在硬盘中构建产物，不需要输出路径
-    filename: "static/js/main.js",
+    filename: "static/js/[name].js", // 入口文件打包后的名字
+    chunkFilename: "static/js/[name].chunk.js", // 其他文件打包后的名字
   },
 
   //! 核心节点3: loader

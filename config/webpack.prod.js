@@ -16,7 +16,8 @@ module.exports = {
     // __dirname 表示当前文件所在的文件夹的绝对路径
     // path.resolve() 用于将路径或路径片段解析为一个绝对路径
     path: path.resolve(__dirname, "../dist"),
-    filename: "static/js/main.js",
+    filename: "static/js/[name].js", // 入口文件打包后的名字
+    chunkFilename: "static/js/[name].chunk.js", // 其他文件打包后的名字
     clean: true, // 每次打包时，自动清空 dist 目录
   },
 
@@ -91,7 +92,7 @@ module.exports = {
     // .css 文件抽取出来，用<link>引入.html
     new MiniCssExtractPlugin({
       // 输出 css 文件的路径
-      filename: "static/css/main.css",
+      filename: "static/css/[name].css",
     }),
   ],
 
@@ -136,6 +137,24 @@ module.exports = {
       //   },
       // }),
     ],
+    // 分包
+    splitChunks: {
+      chunks: "all", // 对所有 chunk 分组进行优化（同步 + 异步）
+      cacheGroups: {
+        // 默认缓存组：将 node_modules 中的模块单独打包成 vendors.js
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          filename: "static/js/vendors.js",
+          priority: -10, // 权重值越低优先级越高
+        },
+        // 将重复引用的模块打包成 common.js
+        common: {
+          minChunks: 2, // 最少被引用次数
+          filename: "static/js/common.js",
+          priority: -20,
+        },
+      },
+    },
   },
 
   //! 核心节点5: 模式

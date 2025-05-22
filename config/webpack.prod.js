@@ -2,6 +2,7 @@ const path = require("path");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { getStyleLoader } = require("./utiles_loader");
 
 module.exports = {
   //! 核心节点1：打包的入口，相对路径
@@ -22,40 +23,12 @@ module.exports = {
       // 处理 .css 文件
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          // 在变成css之前使用postcss
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [
-                  "postcss-preset-env", //能解决大多数css兼容性问题
-                ],
-              },
-            },
-          },
-        ],
+        use: getStyleLoader(MiniCssExtractPlugin, ".css"),
       },
       // 处理 .less 文件
       {
         test: /\.less$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [
-                  "postcss-preset-env", //能解决大多数css兼容性问题
-                ],
-              },
-            },
-          },
-          "less-loader",
-        ],
+        use: getStyleLoader(MiniCssExtractPlugin, ".less"),
       },
       // 处理图片文件
       {
